@@ -1,33 +1,83 @@
-// EDIT ONLY THIS LIST to add or change your links.
-// Replace an empty url with a full https:// address.
-// You can add more entries by copying a { title, url } line.
+// YOUR RESOURCE CATALOGUE
+// Add a full https:// URL to publish an entry. Empty URLs stay hidden.
+// Optional fields can be left blank. Duplicate an entry to add more resources.
 const researchResources = {
   protocols: [
-    { title: "Laboratory protocol", url: "" },
+    {
+      title: "Your protocol title",
+      url: "",
+      description: "",
+      category: "",
+      version: "",
+      updated: "",
+      requirements: "",
+      citation: "",
+      downloadUrl: ""
+    }
   ],
   pipelines: [
-    { title: "Analysis pipeline", url: "" },
-  ],
+    {
+      title: "Your pipeline title",
+      url: "",
+      description: "",
+      category: "",
+      version: "",
+      updated: "",
+      requirements: "",
+      citation: "",
+      downloadUrl: ""
+    }
+  ]
 };
 
-function renderResources(elementId, entries) {
-  const container = document.getElementById(elementId);
-  const available = entries.filter(entry => {
-    try { return ["https:", "http:"].includes(new URL(entry.url).protocol); }
-    catch { return false; }
-  });
-  if (!available.length) return;
-  const list = document.createElement("ul");
-  list.className = "resource-list";
-  for (const entry of available) {
-    const item = document.createElement("li");
-    const link = document.createElement("a");
-    link.href = entry.url;
-    link.textContent = entry.title + " ↗";
-    item.append(link);
-    list.append(item);
-  }
-  container.replaceChildren(list);
+// DISPLAY LOGIC — no changes needed below this line.
+function validResourceUrl(value) {
+  try { return ["https:", "http:"].includes(new URL(value).protocol); }
+  catch { return false; }
 }
-renderResources("protocol-links", researchResources.protocols);
-renderResources("pipeline-links", researchResources.pipelines);
+function resourceElement(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text) el.textContent = text;
+  return el;
+}
+function renderResources(elementId, entries, kind) {
+  const container = document.getElementById(elementId);
+  if (!container) return;
+  const published = entries.filter(entry => validResourceUrl(entry.url));
+  if (!published.length) return;
+  const fragment = document.createDocumentFragment();
+  for (const entry of published) {
+    const card = resourceElement("article", "resource-entry");
+    if (entry.category) card.append(resourceElement("span", "resource-type", entry.category));
+    card.append(resourceElement("h4", "", entry.title || (kind === "protocol" ? "Protocol" : "Pipeline")));
+    if (entry.description) card.append(resourceElement("p", "", entry.description));
+    const metadata = resourceElement("dl", "resource-meta");
+    for (const [label, value] of [["Version", entry.version], ["Updated", entry.updated]]) {
+      if (!value) continue;
+      const group = resourceElement("div");
+      group.append(resourceElement("dt", "", label), resourceElement("dd", "", value));
+      metadata.append(group);
+    }
+    if (metadata.childNodes.length) card.append(metadata);
+    if (entry.requirements || entry.citation) {
+      const details = resourceElement("details");
+      details.append(resourceElement("summary", "", "Requirements & citation"));
+      if (entry.requirements) details.append(resourceElement("p", "", entry.requirements));
+      if (entry.citation) details.append(resourceElement("p", "", entry.citation));
+      card.append(details);
+    }
+    const link = resourceElement("a", "resource-action", kind === "protocol" ? "View protocol ↗" : "Explore pipeline ↗");
+    link.href = entry.url;
+    card.append(link);
+    if (validResourceUrl(entry.downloadUrl)) {
+      const download = resourceElement("a", "resource-secondary", "Supporting files ↗");
+      download.href = entry.downloadUrl;
+      card.append(download);
+    }
+    fragment.append(card);
+  }
+  container.replaceChildren(fragment);
+}
+renderResources("protocol-links", researchResources.protocols, "protocol");
+renderResources("pipeline-links", researchResources.pipelines, "pipeline");
