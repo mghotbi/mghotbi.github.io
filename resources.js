@@ -4,14 +4,14 @@
 const researchResources = {
   protocols: [
     {
-      title: "Your protocol title",
-      url: "",
-      description: "",
-      category: "",
-      version: "",
-      updated: "",
-      requirements: "",
-      citation: "",
+      title: "Maize & Wheat Redox Phenotyping (SOP-RDX-01)",
+      url: "https://mghotbi.github.io/assets/protocols/Maize-Wheat-Redox-Phenotyping-SOP.pdf",
+      description: "Bench protocols for ROS localisation (DAB, NBT, H\u2082DCFDA), H\u2082O\u2082 quantification, lipid peroxidation, antioxidant enzymes and glutathione/ascorbate redox state in maize and wheat leaves and roots, with sampling rules for flooding and recovery experiments. Each assay is anchored to one practical reference.",
+      category: "Redox physiology",
+      version: "2.1",
+      updated: "22 September 2026",
+      requirements: "Plate reader (absorbance and fluorescence), UV spectrophotometer, vacuum infiltration, fluorescence or confocal microscope (H\u2082DCFDA), liquid nitrogen and \u221280 \u00B0C storage.",
+      citation: "Ghotbi, M. (2026). Maize & Wheat Redox Phenotyping: Standard Operating Procedure SOP-RDX-01, version 2.1. https://mghotbi.github.io/assets/protocols/Maize-Wheat-Redox-Phenotyping-SOP.pdf",
       downloadUrl: ""
     }
   ],
