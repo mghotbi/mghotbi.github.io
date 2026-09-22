@@ -6,3 +6,44 @@
 
 /* Research resources — editorial collection layout */
 .methods-heading{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:38px}.methods-heading h2{font-size:clamp(38px,4.5vw,57px);margin-bottom:0;line-height:1.08}.methods-heading h2 em{font-weight:400;color:var(--accent)}.methods-heading>p{max-width:420px;font-size:18px;color:var(--muted);margin-bottom:4px}.methods-collections{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.method-collection{background:#fffefa;border:1px solid #cdd4c9;border-top:3px solid #a34e2a;padding:32px;min-width:0}.pipeline-collection{background:#eaf0e8;border-top-color:#173c36}.collection-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:23px}.collection-number{font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--muted)}.method-icon{width:38px;height:38px;color:var(--accent);flex-shrink:0}.pipeline-collection .method-icon{color:var(--ink)}.method-collection>h3{font-family:Georgia,serif;font-size:38px;letter-spacing:-.035em;line-height:1.15;margin-bottom:14px}.collection-description{font-size:16px;line-height:1.7;color:var(--muted);min-height:82px;margin-bottom:22px}.collection-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}.collection-tags span{font-size:12px;line-height:1.5;padding:5px 9px;border:1px solid #cdd4c9;background:#ffffff70;color:#3d554d}.resource-entries{border-top:1px solid #cdd4c9}.resource-empty{padding:25px 0 10px;min-height:190px}.availability{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin-bottom:18px}.availability>span{width:6px;height:6px;background:#78897c;border-radius:50%}.resource-empty h4{font-size:18px;font-weight:500;margin:0 0 8px}.resource-empty p{font-size:15px;color:var(--muted);margin:0;max-width:340px}.collection-footnote{margin:20px 0 0;padding-top:18px;border-top:1px solid #cdd4c9;color:var(--muted);font-size:12px;line-height:1.6}.resource-entry{padding:25px 0;border-bottom:1px solid #cdd4c9;overflow-wrap:anywhere}.resource-entry:last-child{border-bottom:0;padding-bottom:5px}.resource-entry h4{font-size:21px;line-height:1.4;font-weight:500;margin:0 0 12px}.resource-entry>p{font-size:15px;color:var(--muted);margin-bottom:16px}.resource-type{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:10px}.resource-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 20px;font-size:14px}.resource-meta div{min-width:0}.resource-meta dt{font-size:12px;color:var(--muted);margin-bottom:3px}.resource-meta dd{margin:0}.resource-action{display:inline-flex;gap:20px;align-items:center;text-decoration:none;font-size:14px;border-bottom:1px solid var(--ink);padding-bottom:5px}.resource-secondary{font-size:14px;display:inline-block;margin:12px 0 0 18px}.resource-entry details{font-size:14px}.resource-entry details summary{font-size:14px;padding:14px 0 7px}.resource-entry details p{font-size:14px;color:var(--muted);margin:0 0 16px}@media(max-width:900px){.method-collection{padding:25px}.collection-description{min-height:110px}.collection-tags{min-height:70px;align-content:start}}@media(max-width:760px){.methods-heading{grid-template-columns:1fr;gap:22px}.methods-collections{grid-template-columns:1fr;gap:22px}.collection-description{min-height:0}.collection-tags{min-height:0}.resource-empty{min-height:0;padding-bottom:15px}.methods-heading h2{font-size:42px}.method-collection>h3{font-size:34px}.resource-meta{grid-template-columns:1fr}.resource-secondary{display:block;margin-left:0}}@media print{.methods-collections{display:block}.method-collection{break-inside:avoid;margin-bottom:20px}}
+
+
+/* Protocol landing pages */
+.breadcrumb{font-size:13px;color:var(--muted);margin:30px 0 0}
+.breadcrumb a{text-decoration:none}
+.protocol-hero{padding:48px 0 60px;border-bottom:1px solid var(--line);max-width:900px}
+.protocol-title{font-size:clamp(44px,6vw,72px)}
+.protocol-title span{font-size:.4em;color:var(--muted)}
+.protocol-stats{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.protocol-stats li{font-size:14px;border:1px solid var(--line);background:var(--white);padding:7px 13px}
+.protocol-stats strong{color:var(--accent);font-family:Georgia,serif;font-size:18px;font-weight:400;margin-right:4px}
+.protocol-note{margin-top:30px;background:#e9ece3;border-left:3px solid var(--accent);padding:18px 22px;font-size:15px}
+.protocol-note p{margin:0}
+.protocol-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:30px 0 0;font-size:14px}
+.protocol-facts dt{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.protocol-facts dd{margin:0}
+.assay-groups{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.assay-group{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--ink);padding:28px}
+.assay-label{font-size:12px;text-transform:uppercase;letter-spacing:.13em;font-weight:700;color:var(--accent);margin-bottom:8px}
+.assay-group h3{font-family:Georgia,serif;font-size:25px;letter-spacing:-.02em;margin-bottom:16px}
+.assay-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.assay-list li{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.assay-list li:last-child{border-bottom:0}
+.assay-id{font-family:Georgia,serif;color:var(--accent)}
+.assay-list a{display:block;font-size:13px;color:var(--muted);margin-top:3px;text-decoration:none}
+.assay-list a:hover{color:var(--accent)}
+.protocol-points{margin:0;padding-left:20px;color:var(--muted);font-size:16px}
+.protocol-points li{margin-bottom:10px}
+.protocol-points strong{color:var(--ink)}
+.table-scroll{overflow-x:auto}
+.protocol-table{width:100%;border-collapse:collapse;font-size:15px;background:var(--white)}
+.protocol-table th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--white);background:var(--ink);padding:10px 14px;font-weight:700}
+.protocol-table td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.protocol-table a{text-decoration:none}
+.table-note{font-size:14px;color:var(--muted);margin-top:16px}
+.citation-block{background:var(--white);border:1px solid var(--line);padding:18px 22px;font-size:15px;overflow-wrap:anywhere}
+@media(max-width:760px){.protocol-hero{padding:34px 0 44px}
+.protocol-facts{grid-template-columns:1fr 1fr}
+.assay-groups{grid-template-columns:1fr}
+.assay-group{padding:22px}
+}

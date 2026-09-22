@@ -4,15 +4,15 @@
 const researchResources = {
   protocols: [
     {
-      title: "Maize & Wheat Redox Phenotyping (SOP-RDX-01)",
-      url: "https://mghotbi.github.io/assets/protocols/Maize-Wheat-Redox-Phenotyping-SOP.pdf",
-      description: "Bench protocols for ROS localisation (DAB, NBT, H\u2082DCFDA), H\u2082O\u2082 quantification, lipid peroxidation, antioxidant enzymes and glutathione/ascorbate redox state in maize and wheat leaves and roots, with sampling rules for flooding and recovery experiments. Each assay is anchored to one practical reference.",
-      category: "Redox physiology",
-      version: "2.1",
+      title: "Maize & Wheat Redox Phenotyping",
+      url: "protocols/maize-wheat-redox-phenotyping.html",
+      description: "Bench protocols for ROS localisation, H\u2082O\u2082 quantification, oxidative damage, antioxidant buffering and recovery phenotyping in maize and wheat.",
+      category: "Plant redox phenotyping",
+      version: "SOP-RDX-01",
       updated: "22 September 2026",
-      requirements: "Plate reader (absorbance and fluorescence), UV spectrophotometer, vacuum infiltration, fluorescence or confocal microscope (H\u2082DCFDA), liquid nitrogen and \u221280 \u00B0C storage.",
-      citation: "Ghotbi, M. (2026). Maize & Wheat Redox Phenotyping: Standard Operating Procedure SOP-RDX-01, version 2.1. https://mghotbi.github.io/assets/protocols/Maize-Wheat-Redox-Phenotyping-SOP.pdf",
-      downloadUrl: ""
+      requirements: "Research-use protocol. Conditions marked as pilot should be validated for the local tissue, instrument and experimental system. Follow institutional safety procedures and current SDS guidance.",
+      citation: "Ghotbi, M. (2026). Maize & Wheat Redox Phenotyping. Standard Operating Procedure SOP-RDX-01. https://mghotbi.github.io/protocols/maize-wheat-redox-phenotyping.html",
+      downloadUrl: "assets/protocols/SOP-RDX-01_Maize-Wheat-Redox-Phenotyping.pdf"
     }
   ],
   pipelines: [
@@ -32,7 +32,16 @@ const researchResources = {
 
 // DISPLAY LOGIC — no changes needed below this line.
 function validResourceUrl(value) {
-  try { return ["https:", "http:"].includes(new URL(value).protocol); }
+  if (!value) return false;
+  try {
+    const url = new URL(value, window.location.href);
+    return ["https:", "http:", "file:"].includes(url.protocol);
+  } catch {
+    return false;
+  }
+}
+function isInternalUrl(value) {
+  try { return new URL(value, window.location.href).origin === window.location.origin; }
   catch { return false; }
 }
 function resourceElement(tag, className, text) {
@@ -67,12 +76,16 @@ function renderResources(elementId, entries, kind) {
       if (entry.citation) details.append(resourceElement("p", "", entry.citation));
       card.append(details);
     }
-    const link = resourceElement("a", "resource-action", kind === "protocol" ? "View protocol ↗" : "Explore pipeline ↗");
+    const internal = isInternalUrl(entry.url);
+    const noun = kind === "protocol" ? "protocol" : "pipeline";
+    const link = resourceElement("a", "resource-action", internal ? `Explore ${noun} →` : `View ${noun} ↗`);
     link.href = entry.url;
     card.append(link);
     if (validResourceUrl(entry.downloadUrl)) {
-      const download = resourceElement("a", "resource-secondary", "Supporting files ↗");
+      const isPdf = /\.pdf($|[?#])/i.test(entry.downloadUrl);
+      const download = resourceElement("a", "resource-secondary", isPdf ? "Download SOP ↓" : "Supporting files ↗");
       download.href = entry.downloadUrl;
+      if (isPdf && isInternalUrl(entry.downloadUrl)) download.setAttribute("download", "");
       card.append(download);
     }
     fragment.append(card);
