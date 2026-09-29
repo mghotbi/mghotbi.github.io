@@ -3,6 +3,17 @@
 // Optional fields can be left blank. Duplicate an entry to add more resources.
 const researchResources = {
   protocols: [
+{
+      "title": "ROS & Redox Phenotyping · Microplate Reader",
+      "url": "protocols/plate-reader-redox-phenotyping.html",
+      "description": "96-well methods for H₂O₂, oxidative damage, antioxidant enzymes and redox metabolites in maize and wheat leaves and roots.",
+      "category": "Public SOP · Microplate assays",
+      "version": "SOP-RDX-02 · v2.0",
+      "updated": "29 September 2026",
+      "requirements": "Research-use protocol. Check assay-specific wavelengths, plate compatibility and local matrix validation. Includes absorbance and fluorescence methods; not every ROS assay transfers to a plate reader.",
+      "citation": "Ghotbi, M. (2026). Plate-Reader Redox Phenotyping. SOP-RDX-02, v2.0.",
+      "downloadUrl": "assets/protocols/SOP-RDX-02_Plate-Reader-Redox-Phenotyping_v2.0.pdf"
+},
     {
       title: "Maize & Wheat Redox Phenotyping",
       url: "protocols/maize-wheat-redox-phenotyping.html",
@@ -17,15 +28,11 @@ const researchResources = {
   ],
   pipelines: [
     {
-      title: "Your pipeline title",
-      url: "",
-      description: "",
-      category: "",
-      version: "",
-      updated: "",
-      requirements: "",
-      citation: "",
-      downloadUrl: ""
+      title: "The GhotbiLab workflow collection",
+      url: "https://github.com/GhotbiLab",
+      description: "Explore available analysis pipelines, scripts and accompanying documentation in the GhotbiLab GitHub collection. Public repositories can be browsed directly; availability varies by project.",
+      category: "Code & computational workflows",
+      actionLabel: "Browse available repositories ↗"
     }
   ]
 };
@@ -78,7 +85,7 @@ function renderResources(elementId, entries, kind) {
     }
     const internal = isInternalUrl(entry.url);
     const noun = kind === "protocol" ? "protocol" : "pipeline";
-    const link = resourceElement("a", "resource-action", internal ? `Explore ${noun} →` : `View ${noun} ↗`);
+    const link = resourceElement("a", "resource-action", entry.actionLabel || (internal ? `Explore ${noun} →` : `View ${noun} ↗`));
     link.href = entry.url;
     card.append(link);
     if (validResourceUrl(entry.downloadUrl)) {
@@ -94,3 +101,4 @@ function renderResources(elementId, entries, kind) {
 }
 renderResources("protocol-links", researchResources.protocols, "protocol");
 renderResources("pipeline-links", researchResources.pipelines, "pipeline");
+
