@@ -54,6 +54,32 @@
     header.appendChild(progress);
   }
 
+  /* --- Publication rows are clickable across their whole width ----------- */
+
+  /* The row inverts on hover, which promises it is one target. The title
+     link stays the real link, so keyboard and right-click are unchanged. */
+
+  var papers = document.querySelector("#publications");
+
+  if (papers) {
+    papers.addEventListener("click", function (event) {
+      var row = event.target.closest(".paper");
+      if (!row || event.target.closest("a")) return;
+
+      /* Don't hijack a click that was the end of selecting text. */
+      var selection = window.getSelection();
+      if (selection && selection.toString().length) return;
+
+      var link = row.querySelector("h3 a[href]");
+      if (!link) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey) {
+        window.open(link.href, "_blank", "noopener");
+      } else {
+        link.click();
+      }
+    });
+  }
+
   /* --- Scroll motion ------------------------------------------------------ */
 
   /* Elements are marked here rather than in the markup, so index.html stays
@@ -144,6 +170,11 @@
     });
   }
 
+  /* The pale bands, so a rail tick crossing one can switch to dark ink. */
+  var lightBands = Array.prototype.slice.call(
+    document.querySelectorAll("#publications, #resources, #cv")
+  );
+
   var scrollRange = 1;
   var heroHeight = 1;
 
@@ -181,12 +212,26 @@
 
     if (fill) fill.style.setProperty("--read", read);
     if (progress) progress.style.setProperty("--read", read);
+    if (header) header.classList.toggle("scrolled", y > 40);
 
     /* The portrait drifts a little slower than the page while the hero is
        still on screen. */
     if (portrait && !reduced && window.innerWidth > 760) {
       var within = Math.min(1, Math.max(0, y / heroHeight));
       portrait.style.setProperty("--shift", (within * 46).toFixed(2) + "px");
+    }
+
+    /* Each rail tick takes the ink of whichever band is behind it. */
+    if (rail && lightBands.length) {
+      sections.forEach(function (entry) {
+        if (!entry.tick) return;
+        var tickY = entry.tick.getBoundingClientRect().top;
+        var onLight = lightBands.some(function (band) {
+          var box = band.getBoundingClientRect();
+          return tickY >= box.top && tickY <= box.bottom;
+        });
+        entry.tick.classList.toggle("on-light", onLight);
+      });
     }
 
     /* Active section: the last one whose top has passed the reading line. */
