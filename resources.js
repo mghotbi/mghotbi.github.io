@@ -3,6 +3,13 @@
 // Optional fields can be left blank. Duplicate an entry to add more resources.
 const researchResources = {
   protocols: [
+    {
+      title: "Restricted protocol collection",
+      url: "https://drive.google.com/drive/folders/1F76FxJrMChos5CgjyWPgHUF178bcI37W?usp=drive_link",
+      description: "Additional research protocols shared on request. Open the folder in Google Drive and request access with your Google account if prompted.",
+      category: "🔒 Access required · Google Drive",
+      actionLabel: "Request access / open folder ↗"
+    },
 {
       "title": "ROS & Redox Phenotyping · Microplate Reader",
       "url": "protocols/plate-reader-redox-phenotyping.html",
@@ -27,6 +34,13 @@ const researchResources = {
     }
   ],
   pipelines: [
+    {
+  "title": "QIIME-compatible databases & sequencing resources",
+  "url": "https://github.com/mghotbi/QIIME-compatible-database",
+  "description": "A curated collection of amplicon primers, QIIME 2 reference artifacts, Hackflex guidance and shotgun-metagenomics database resources for soil–plant–microbe research.",
+  "category": "Reference databases & analysis resources",
+  "actionLabel": "Explore databases & guidance ↗"
+},
     {
       title: "The GhotbiLab workflow collection",
       url: "https://github.com/GhotbiLab",
