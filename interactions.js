@@ -13,6 +13,26 @@
 
   var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduced = motionQuery.matches;
+  var motionButton = document.querySelector('.motion-control');
+  var manualPause = false;
+  try { manualPause = sessionStorage.getItem('motion-paused') === 'true'; } catch (e) {}
+  function applyMotionPreference() {
+    reduced = motionQuery.matches || manualPause;
+    root.dataset.motion = reduced ? 'paused' : 'playing';
+    if (motionButton) {
+      motionButton.hidden = false;
+      motionButton.setAttribute('aria-pressed', String(reduced));
+      motionButton.querySelector('.motion-label').textContent = motionQuery.matches ? 'Reduced motion' : (manualPause ? 'Resume motion' : 'Pause motion');
+      motionButton.querySelector('.motion-symbol').textContent = reduced ? '▷' : 'Ⅱ';
+      motionButton.disabled = motionQuery.matches;
+    }
+  }
+  applyMotionPreference();
+  if (motionButton) motionButton.addEventListener('click', function () {
+    manualPause = !manualPause;
+    try { sessionStorage.setItem('motion-paused', String(manualPause)); } catch (e) {}
+    applyMotionPreference();
+  });
 
   /* --- Mobile menu ------------------------------------------------------- */
 
@@ -105,7 +125,7 @@
       document.querySelectorAll(group.selector).forEach(function (node, index) {
         node.setAttribute("data-reveal", "");
         if (group.stagger) {
-          node.style.setProperty("--delay", (index * group.stagger).toFixed(3) + "s");
+          node.style.setProperty("--delay", ((index % 3) * group.stagger).toFixed(3) + "s");
         }
       });
     });
@@ -262,7 +282,7 @@
   /* Respect a preference changed mid-visit. */
   if (motionQuery.addEventListener) {
     motionQuery.addEventListener("change", function (event) {
-      reduced = event.matches;
+      applyMotionPreference();
       if (reduced && portrait) portrait.style.removeProperty("--shift");
     });
   }

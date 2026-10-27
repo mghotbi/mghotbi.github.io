@@ -1,0 +1,7 @@
+Upload the CONTENTS of mghotbi.github.io to the root of the existing website repository, including assets and protocols. Do not upload the ZIP itself or nest the enclosing folder.
+
+This release changes index.html, style.css and interactions.js. Keep all existing supplied assets, including local fonts. The motion settings button pauses animation and remembers the choice within the browser session. System Reduced Motion is always respected.
+
+IMPORTANT: Keep .nojekyll in the repository root. Finder hides this file by default (Command-Shift-period shows hidden files). If missing on GitHub, use Add file > Create new file, name it .nojekyll, and commit. This is a plain HTML website and does not need Jekyll.
+
+Check the Actions tab for a successful Pages deployment, then refresh with Command-Shift-R.
